@@ -1,21 +1,14 @@
-from inspect import _void
-from typing import Self
-import mysql.connector
+import mysql.connector as db
 
-class VendingMachine:
-    def __init__(self) -> None:
-        mysql.connector.connect(
-            host = "3306",
-            user = "m-noma",
-            password="m-noma"
+my_db = db.connect(
+            host = "localhost",
+            user = "root",
+            password="",
+            db = "vending_machine_db"
         )
-
-    def get_cursor(self) -> Self:
-        return self.cursor()
-    
-    def operations_on_database(self,handl: str) -> _void:
-        self.excute("{}".format(handl))
-
-vm = VendingMachine()
-db = vm.get_cursor()
-db.operations_on_database("SHOW TABLES FROM `product_db`")
+# print(my_db)
+my_db.ping(reconnect=True)
+print(my_db.is_connected())
+print()
+cur = my_db.cursor()
+cur.execute("INSERT INTO `vending_machine_db`.`product_tb` VALUE (6, 'ちんこ', 110, 10);")
