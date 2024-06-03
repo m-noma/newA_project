@@ -10,4 +10,5 @@ my_db = db.connect(
 my_db.ping(reconnect=True)
 print(my_db.is_connected())
 cur = my_db.cursor()
-(cur.execute("INSERT INTO `vending_machine_db`.`product_tb` VALUE (6, 'ちんこ', 110, 10);"))
+(cur.execute("INSERT INTO `vending_machine_db`.`product_tb` VALUE (6, '聖水', 110, 10);"))
+cur.close()
