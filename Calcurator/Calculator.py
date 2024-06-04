@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import math
 
 class Calculator():
     def __init__(self) -> None:
@@ -109,13 +110,14 @@ class Calculator():
     
     def push_btn_special_operator(self, special_operator: str):
         if(special_operator == "π"):
-            pass
+            self.now_str = str(float(self.now_str) * math.pi)
         elif(special_operator == "!"):
             pass
+            self.now_str = str(math.factorial(float(self.now_str)))
         elif(special_operator == "√"):
             pass
-        #     self.temp_left_num = self.now_str
-        # self.show_temp()
+            self.now_str = str(math.sqrt(float(self.now_str)))
+        self.update_now_str()
 
     def push_btn_calcutation(self):
         self.push_btn_operator(None)
@@ -142,6 +144,10 @@ class Calculator():
         
     # 初期にー入れた場合はどうする？
     def push_btn_plus_minus(self):
-        pass
+        if(self.now_str[0] != "-"):
+            self.now_str = "-" + self.now_str
+        else:
+            self.now_str = self.now_str[1:]
+        self.update_now_str()
 
 app = Calculator()
