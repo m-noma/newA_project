@@ -68,6 +68,8 @@ class Calculator():
 
     # 数値に変換可能かの確認
     def is_number(self, num_str: str):
+        if(num_str == "." and len(self.now_str) == 0):
+            num_str = "0."
         try:
             float(self.now_str + num_str)
         except ValueError:
@@ -77,9 +79,11 @@ class Calculator():
 
     # 頭に.が来た際の処理, 0の処理　必要
     def push_btn_num(self, num_str: str):
+        # 数字処理できるか判定
         if(self.is_number(num_str)):
             self.now_str = self.now_str + num_str
             self.update_now_str()
+        
         print("{}_btn_was_pushed.\n".format(num_str))
 
     def push_btn_operator(self, next_operator: str):
@@ -121,12 +125,17 @@ class Calculator():
 
     def push_btn_calcutation(self):
         self.push_btn_operator(None)
+        print("temp_left_num: {},\nnow_str: {},\nnow_operator: {}\n".format(self.temp_left_num, self.now_str, self.now_operator))
         self.show_temp()
 
 
     def push_btn_clear(self) -> None:
-        self.now_str = ""
+        if(self.now_str != ""):
+            self.now_str = ""
+        elif(self.now_str == ""):
+            self.push_btn_all_clear()
         self.update_now_str()
+        self.show_temp()
 
     def push_btn_all_clear(self) -> None:
         self.temp_left_num = None
@@ -144,7 +153,9 @@ class Calculator():
         
     # 初期にー入れた場合はどうする？
     def push_btn_plus_minus(self):
-        if(self.now_str[0] != "-"):
+        if(len(self.now_str) == 0):
+            pass
+        elif(self.now_str[0] != "-"):
             self.now_str = "-" + self.now_str
         else:
             self.now_str = self.now_str[1:]
