@@ -8,6 +8,7 @@ class Calculator():
         self.now_str: str = ""
         self.now_operator: str = None
         self.root = tk.Tk()
+        # self.root.geometry("500x400")
         self.frame = ttk.Frame(self.root)
         self.label = tk.Label(self.frame, text=self.now_str)
         self.frame.grid(column=0, row=0, sticky= tk.NSEW, padx=5, pady=5)

@@ -49,24 +49,35 @@ class Practice2:
         pass
 
     def fizz_buzz(self, start_num: str, end_num:str) -> None:
-        for i in range(end_num-start_num+1):
-            if((i+start_num) % 3 == 0 and (i+start_num) % 5 == 0):
+        for i in range(int(end_num)-int(start_num)+1):
+            if((i+int(start_num)) % 3 == 0 and (i+int(start_num)) % 5 == 0):
                 print("FizzBuzz, ")
-            elif((i+start_num) % 3 == 0):
+            elif((i+int(start_num)) % 3 == 0):
                 print("Fizz, ")
-            elif((i+start_num) % 5 == 0):
+            elif((i+int(start_num)) % 5 == 0):
                 print("Buzz, ")
             else:
-                print("{}, ".format(i+start_num))
+                print("{}, ".format(i+int(start_num)))
 
 
 def main() -> None:
-    # p1_class = Practice1()
-    # list_num = p1_class.re_base_num(input("Input >"))
-    # print("Output >{}".format(p1_class.sort_list(list_num)))
     
-    p2_class = Practice2()
-    p2_class.fizz_buzz(-2,35)
+    while(True):
+        select_num = input("問題1 → 1\n問題2 → 2\n終了→ 3 を入力.\nInput -> ")
+        if(select_num == "1"):
+            p1_class = Practice1()
+            list_num = p1_class.re_base_num(input("Input >"))
+            print("Output >{}".format(p1_class.sort_list(list_num)))
+        elif(select_num == "2"):
+            p1_class = Practice1()
+            p2_class = Practice2()
+            p2_select_num = input("値を入力して下さい.")
+            s_num =p1_class.re_base_num(p2_select_num)
+            p2_class.fizz_buzz(s_num[0], s_num[1])
+        elif(select_num == "3"):
+            break
+
+
 
 
 if __name__ == "__main__":

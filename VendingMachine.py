@@ -28,6 +28,7 @@ class VendingMachineDB:
                 for d in data:
                     result.append(d)
             print(result)
+            return result
         except Exception as err:
             print(f"Error: {err}")
 
@@ -38,29 +39,37 @@ class VendingMachineDB:
         print("database was closed.\n")
 
 class VendingMachineUI:
-    def __init__(self, product_list) -> None:
+    def __init__(self) -> None:
         self.root = tk.Tk()
         self.frame = ttk.Frame(self.root)
         self.label = tk.Label(self.frame, text="おはようございます")
         self.frame.grid(column=0, row=0, sticky= tk.NSEW, padx=5, pady=5)   
-        # ここの処理を自動化させたい  
-        # self.text_product_0:str = None
-        # btn_product_0 = tk.Button(self.frame, text=self.text_product_0, command= lambda: self.push_btn_product(0))
-        # self.text_product_1:str = None
-        # btn_product_1 = tk.Button(self.frame, text=self.text_product_1, command= lambda: self.push_btn_product(1))
-        # self.text_product_2:str = None
-        # btn_product_2 = tk.Button(self.frame, text=self.text_product_2, command= lambda: self.push_btn_product(2))
-        # self.text_product_3:str = None
-        # btn_product_3 = tk.Button(self.frame, text=self.text_product_3, command= lambda: self.push_btn_product(3))
-        # self.text_product_4:str = None
-        # btn_product_4 = tk.Button(self.frame, text=self.text_product_4, command= lambda: self.push_btn_product(4))
-        # ここまで
-        for i, product in product_list:
-            locals()["btn_" + ]
+        # ------------------------↓↓↓ここの処理を自動化させたい↓↓↓-------------------------------  
+        self.text_product_0:str = None
+        self.btn_product_0 = tk.Button(self.frame, text=self.text_product_0, command= lambda: self.push_btn_product(0))
+        self.text_product_1:str = None
+        self.btn_product_1 = tk.Button(self.frame, text=self.text_product_1, command= lambda: self.push_btn_product(1))
+        self.text_product_2:str = None
+        self.btn_product_2 = tk.Button(self.frame, text=self.text_product_2, command= lambda: self.push_btn_product(2))
+        self.text_product_3:str = None
+        self.btn_product_3 = tk.Button(self.frame, text=self.text_product_3, command= lambda: self.push_btn_product(3))
+        self.text_product_4:str = None
+        self.btn_product_4 = tk.Button(self.frame, text=self.text_product_4, command= lambda: self.push_btn_product(4))
+        # -------------------------------↑↑↑ここまで↑↑↑---------------------------------------
 
-        self.label.grid(column=0, row=0, columnspan=5, sticky=tk.NSEW)
+        # やりたかったけどselfってどうやってつけるん！？
+        # for i, product in product_list:
+        #     locals()["btn_product_" + str(i)] = None
+        #     locals()["btn_" + str(i)] = tk.Button(self.frame, text=locals()["btn_product_" + str(i)], command = lambda: self.push_btn_product(i))
 
+        self.label.grid(column=0, row=0, columnspan=6, sticky=tk.NSEW)
+        self.btn_product_0.grid(column=1, row=1, sticky=tk.NSEW)
+        self.btn_product_1.grid(column=2, row=1, sticky=tk.NSEW)
+        self.btn_product_2.grid(column=3, row=1, sticky=tk.NSEW)
+        self.btn_product_3.grid(column=4, row=1, sticky=tk.NSEW)
+        self.btn_product_4.grid(column=5, row=1, sticky=tk.NSEW)
 
+        self.root.mainloop()
 
 
     def push_btn_product(self, btn_num: int):
@@ -70,6 +79,8 @@ class VendingMachineUI:
 my_db = VendingMachineDB()
 # print(my_db.execute_the_query())
 
-my_db.show_table("SELECT * FROM `product_tb`;")
+db_list = my_db.show_table("SELECT * FROM `product_tb`;")
 del my_db
+
+app = VendingMachineUI()
     
